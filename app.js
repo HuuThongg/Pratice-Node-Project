@@ -30,15 +30,13 @@ app.use(express.urlencoded({extended: false}))
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname,'public')));
 // app.use(express.json());
-// app.use('/admin',adminRoutes);
+
 app.use('/admin',adminRoutes)
 
 app.use(shopRoutes);
 
 app.use(errorController.get404)
-// app.use('*',(req,res,next)=>{
-//     res.status(404).send('<h1>no found</h1>')
-// })
+
 
 app.listen(3001, ()=>{
     console.log('server is listening on port 3001')

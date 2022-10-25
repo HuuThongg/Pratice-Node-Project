@@ -1,12 +1,55 @@
-// const mysql = require('mysql2');
-// const pool = mysql.createPool({
-//     host: 'localhost',
-//     user: 'root',
-//     database: 'node-complete',
-//     password: 'Huuthong@0506'
-// })
-// module.exports = pool.promise();
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://thong0506:<password>@cluster0.nrohf5r.mongodb.net/?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 
-const Sequelize = require('sequelize')
-const sequelize = new Sequelize('node-complete','root','Huuthong@0506',{dialect:'mysql', host:'localhost'});
-module.exports = sequelize;
+let _db;
+
+const mongoConnect = (callback)=>{
+    MongoClient.connect('mongodb+srv://thong0506:thong0506@cluster0.nrohf5r.mongodb.net/shop?retryWrites=true&w=majority')
+    .then(client =>{
+        console.log('Connected');
+        _db=client.db();
+        callback();
+    })
+    .catch(err=> {
+        console.log(err)
+        throw err;
+    })
+}
+const getDb =()=>{
+    if(_db){
+        return _db;
+    }
+    throw 'No database found!'
+}
+exports.mongoConnect = mongoConnect;
+exports.getDb = getDb;
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// //delete this
+// const uri = "mongodb+srv://thong0506:jBuX2I36fYi4lXVU@cluster0.dfizncz.mongodb.net/?retryWrites=true&w=majority";
+// // const uri ='mongodb+srv://thong0506:thong0506@cluster0.nrohf5r.mongodb.net/shop?retryWrites=true&w=majority'
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(async err => {
+//   const collection = client.db("shop").collection("test");
+//   // perform actions on the collection object
+//   const pipeline =  [
+//     {
+//         '$limit': 20
+//     }
+//     ] 
+//     // delete this
+//     collection.insertOne(
+//   //  { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } }
+// )
+//     const agg= await collection.aggregate().toArray();
+//     console.log(agg)
+//     client.close();
+// });

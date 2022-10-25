@@ -1,11 +1,27 @@
 // const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://thong0506:<password>@cluster0.nrohf5r.mongodb.net/?retryWrites=true&w=majority";
+// let _db;
+// const mongoConnect = (callback) =>{
+//     const uri = "mongodb+srv://thong0506:<password>@cluster0.nrohf5r.mongodb.net/?retryWrites=true&w=majority";
 // const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // client.connect(err => {
-//   const collection = client.db("test").collection("devices");
+//     _db = client.db("shop");
+//         callback();
+
 //   // perform actions on the collection object
-//   client.close();
 // });
+// }
+// const getDb =()=>{
+//     if(_db){
+//         return _db;
+//     }
+//     throw 'No database found!'
+// }
+// exports.mongoConnect = mongoConnect;
+// exports.getDb = getDb;
+
+
+
+
 const mongodb = require('mongodb');
 const MongoClient = mongodb.MongoClient;
 
@@ -31,6 +47,11 @@ const getDb =()=>{
 }
 exports.mongoConnect = mongoConnect;
 exports.getDb = getDb;
+
+
+
+
+
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // //delete this
